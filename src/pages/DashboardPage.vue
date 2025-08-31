@@ -23,14 +23,14 @@
                   style="margin-left: 16px; margin-top: 16px"
                 >
                   <span class="text-h6 text-weight-bold text-white"
-                    >CHROMA KEY</span
+                    >BACKGROUND</span
                   >
                   <q-toggle v-model="chromaKey" color="positive" keep-color />
                 </div>
                 <div class="flex flex-center" style="height: 100%">
                   <img
-                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
-                    alt="Beach Background"
+                    :src="selectedBackground"
+                    alt="Chroma Background"
                     style="max-width: 90%; display: block; border-radius: 12px"
                   />
                 </div>
@@ -44,6 +44,7 @@
                 icon="photo_camera"
                 label="TAKE PHOTO"
                 unelevated
+                @click="goTo('take-photo')"
               />
             </div>
             <div class="col">
@@ -52,6 +53,7 @@
                 icon="videocam"
                 label="RECORD VIDEO"
                 unelevated
+                @click="goTo('record-video')"
               />
             </div>
             <div class="col">
@@ -60,6 +62,7 @@
                 icon="settings"
                 label="SETTINGS"
                 unelevated
+                @click="goTo('settings')"
               />
             </div>
           </div>
@@ -78,13 +81,30 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const BACKGROUND_KEY = 'selectedChromaBackground';
 
 export default defineComponent({
   setup() {
     const cameraFeed = ref('http://localhost:5000/video_feed'); // Replace with your actual feed
     const chromaKey = ref(true);
+    const router = useRouter();
+    const selectedBackground = ref(
+      localStorage.getItem(BACKGROUND_KEY) ||
+        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
+    );
 
-    return { cameraFeed, chromaKey };
+    window.addEventListener('storage', () => {
+      selectedBackground.value =
+        localStorage.getItem(BACKGROUND_KEY) || selectedBackground.value;
+    });
+
+    function goTo(page: string) {
+      router.push({ path: `/${page}` });
+    }
+
+    return { cameraFeed, chromaKey, goTo, selectedBackground };
   },
 });
 </script>
