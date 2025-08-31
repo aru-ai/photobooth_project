@@ -1,48 +1,7 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <!-- HEADER -->
-    <q-header elevated class="bg-primary text-white">
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-        <q-toolbar-title> Camera Dashboard </q-toolbar-title>
-        <q-btn flat dense round icon="settings" @click="goToSettings" />
-      </q-toolbar>
-    </q-header>
-
-    <!-- SIDEBAR -->
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item clickable v-ripple @click="goTo('dashboard')">
-          <q-item-section avatar>
-            <q-icon name="dashboard" />
-          </q-item-section>
-          <q-item-section>Dashboard</q-item-section>
-        </q-item>
-
-        <q-item clickable v-ripple @click="goTo('camera')">
-          <q-item-section avatar>
-            <q-icon name="videocam" />
-          </q-item-section>
-          <q-item-section>Camera</q-item-section>
-        </q-item>
-
-        <q-item clickable v-ripple @click="goTo('settings')">
-          <q-item-section avatar>
-            <q-icon name="settings" />
-          </q-item-section>
-          <q-item-section>Settings</q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
-
+  <q-layout view="hHh lpR fFf" class="main-modern-layout">
     <!-- MAIN CONTENT -->
-    <q-page-container>
+    <q-page-container class="modern-page-container">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -54,7 +13,7 @@ import { useRouter } from 'vue-router';
 
 export default defineComponent({
   setup() {
-    const leftDrawerOpen = ref(true);
+    const leftDrawerOpen = ref(false);
     const router = useRouter();
 
     const goTo = (route: string) => {
@@ -73,3 +32,60 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+/* Background */
+.main-modern-layout {
+  background: linear-gradient(135deg, #eef2f7 0%, #f9f9fb 100%);
+  font-family: 'Inter', sans-serif;
+}
+
+/* HEADER */
+.modern-header {
+  backdrop-filter: blur(16px);
+  background: rgba(25, 118, 210, 0.85) !important;
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.2);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.modern-toolbar {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+.modern-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+/* DRAWER */
+.modern-drawer {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Drawer Items */
+.modern-item {
+  border-radius: 12px;
+  margin: 4px 8px;
+  transition: all 0.2s ease;
+}
+.modern-item:hover {
+  background: rgba(25, 118, 210, 0.08);
+  transform: translateX(4px);
+}
+.modern-item .q-icon {
+  color: #1976d2;
+}
+
+/* PAGE */
+.modern-page-container {
+  padding: 20px;
+  min-height: 100vh;
+}
+</style>

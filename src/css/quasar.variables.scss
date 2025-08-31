@@ -12,14 +12,21 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : #1976D2;
-$secondary : #26A69A;
-$accent    : #9C27B0;
+// Photobooth Theme Colors
+$primary: #ff3366; // Vibrant pink-red (main accent)
+$secondary: #ffd166; // Warm yellow (fun, energetic)
+$accent: #43e6c2; // Mint green (retro pop)
 
-$dark      : #1D1D1D;
-$dark-page : #121212;
+$dark: #22223b; // Deep indigo (background)
+$dark-page: #181825; // Slightly deeper for dark mode
 
-$positive  : #21BA45;
-$negative  : #C10015;
-$info      : #31CCEC;
-$warning   : #F2C037;
+$positive: #06d6a0; // Bright teal (success)
+$negative: #ef476f; // Pinkish red (error)
+$info: #118ab2; // Blue (info)
+$warning: #f9c74f; // Soft yellow (warning)
+
+$background: #fff8f0; // Light cream (overall background)
+$surface: #f7e1e3; // Soft pink (cards, surfaces)
+
+$text-dark: #22223b;
+$text-light: #fff8f0;
